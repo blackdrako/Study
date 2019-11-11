@@ -40,12 +40,12 @@ void MainWindow::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this); // Создаём объект-живописец
     painter.translate(width() / 2, height() / 2);
-    if (width() < 30 || height() < 30)
+    if (width() < 50 || height() < 50)
      return;
 
     if (width() > height()) // Если ширина окна больше высоты
-     a = (height() - 100) / 2; // Отступ от краёв - 10 пикселей
-    else a = (width() - 100) / 2;
+     a = (height() - 200) / 2; // Отступ от краёв - 10 пикселей
+    else a = (width() - 200) / 2;
 
     QColor orangeRed(240, 100, 0);
     double d=(a*sqrt(2))/2;
@@ -95,13 +95,13 @@ void MainWindow::paintEvent(QPaintEvent* event)
 
     //
     QPolygonF big_square;
-    QPointF A_big = QPointF(0,d+a/2+2);
+    QPointF A_big = QPointF(0,d+a/2);
     big_square.append(A_big);
-    QPointF B_big = QPointF(d+a/2+2,0);
+    QPointF B_big = QPointF(d+a/2,0);
     big_square.append(B_big);
-    QPointF C_big = QPointF(0,-d-a/2-2);
+    QPointF C_big = QPointF(0,-d-a/2);
     big_square.append(C_big);
-    QPointF D_big = QPointF(-d-a/2-2,0);
+    QPointF D_big = QPointF(-d-a/2,0);
     big_square.append(D_big);
     painter.setBrush( Qt::NoBrush);
     painter.setPen(QPen(Qt::black, 2, Qt::DotLine, Qt::FlatCap));
