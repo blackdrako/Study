@@ -38,12 +38,13 @@ class Rectangle
     double a;
     double b;
 public:
-    Rectangle() {
+    Rectangle(void) {
         cout << "Read side A:";
         cin >> a;
         cout << "Read side B:";
         cin >> b;
     }
+    Rectangle(int){}
     void setASide(double t){
         a = t;
     }
@@ -75,35 +76,38 @@ public:
         cout << "Read side B:";
         cin >> b;
     }
-    friend Rectangle operator <(Rectangle& A,Rectangle& B){
-        Rectangle temp;
+    friend bool operator <(Rectangle& A,Rectangle& B){
         double PA = A.perimeterCalculation();
         double PB = B.perimeterCalculation();
         double SA = A.areaCalculation();
         double SB = B.areaCalculation();
         if((PA<PB)&&(SA<SB)){
-            temp.a = A.a;
-            temp.b = A.b;
+            return true;
         } else {
-            temp.a = B.a;
-            temp.b = B.b;
+            return false;
         }
     }
+    Rectangle operator +(Rectangle &B){
+        Rectangle temp(1);
+        temp.a = this->a+B.a;
+        temp.b = this->b+B.b;
+        return temp;
+    }
     friend Rectangle operator &(Rectangle& A,Rectangle& B){
-        Rectangle temp;
+        Rectangle temp(1);
         temp.a = addNumbers(A.a,B.a,1);
         temp.b = addNumbers(A.b,B.b,1);
         return temp;
     }
 };
 
-
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
     Rectangle A;
     Rectangle B;
-    A = A&B;
+    Rectangle C(1);
+    C = A+B;
     A.viewRectangleSide();
     return app.exec();
 }
