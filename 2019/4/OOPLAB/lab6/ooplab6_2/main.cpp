@@ -22,8 +22,9 @@ private:
     CONST HANDLE hMutex;
     bool sync;
     string &str;
+    int n[2];
 public:
-    friend void start_thread(Thread&);
+    void start_thread(Thread&);
     virtual void func() = 0;
     Thread(CONST HANDLE hMutex, bool sync, std::string& ) : hMutex(hMutex), sync(sync), str(str) {};
     void lock_mutex() { WaitForSingleObject(this->hMutex, INFINITE); }
@@ -110,14 +111,9 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_LINUX
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 #endif
-    string s;
-    bool sync_mode=true;
+    string s="aaa bbb ccc";
+    int sync_mode=0;
     unsigned count_of_word;
-
-    cout<<"Input str: ";
-    getline(cin,s);
-    cout<<"1 - sync, 0 - async:"<<endl;
-    cin>>sync_mode;
 
     CONST HANDLE Mutex = CreateMutex(NULL, FALSE, NULL);
     HANDLE hThreads[3];

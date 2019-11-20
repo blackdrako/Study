@@ -45,6 +45,9 @@ public:
         cin >> b;
     }
     Rectangle(int){}
+    Rectangle(double a, double aa): a(a), b(aa) {}
+    Rectangle& operator+=(const Rectangle& rhs);
+    const Rectangle operator+(const Rectangle& rhs) const;
     void setASide(double t){
         a = t;
     }
@@ -87,12 +90,6 @@ public:
             return false;
         }
     }
-    Rectangle operator +(Rectangle &B){
-        Rectangle temp(1);
-        temp.a = this->a+B.a;
-        temp.b = this->b+B.b;
-        return temp;
-    }
     friend Rectangle operator &(Rectangle& A,Rectangle& B){
         Rectangle temp(1);
         temp.a = addNumbers(A.a,B.a,1);
@@ -100,14 +97,23 @@ public:
         return temp;
     }
 };
-
+Rectangle& Rectangle::operator+=(const Rectangle& rhs) {
+    this->a += rhs.a;
+    this->b += rhs.b;
+    return *this;
+}
+const Rectangle Rectangle::operator+(const Rectangle& rhs) const {
+    return Rectangle(*this) += rhs;
+}
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
     Rectangle A;
     Rectangle B;
     Rectangle C(1);
-    C = A+B;
+    A+=B;
+    C=A+B;
     A.viewRectangleSide();
+    C.viewRectangleSide();
     return app.exec();
 }
