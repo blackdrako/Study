@@ -147,7 +147,7 @@ elif choice == 1:
     M = max(map(max, restrictions))     # - максимум из системы ограничений
     M = max(M, max(free_koefficients))  # - сравним и со свободными членами
     M = max(M, max(objective))          # - и с целевой функцией
-    M *= 10
+    M *= 2
     print("Выбрано число M = {}".format(M))
 
     # Добавим в целевую функцию и ограничения искуственные базисные переменные
@@ -198,3 +198,5 @@ for i in range(m):
         print("x{} = {}".format(i+1, tbl.matrix[basis_in_lines.index(i+1)][0]))
     else:
         print("x{} = 0".format(i+1))
+        
+input('Press ENTER to EXIT')

@@ -27,7 +27,7 @@ def printable_objective(objective):
     return s
 
 
-def main():
+def __main__():
     n, m = map(int, input("Сколько в системе ограничений уравнений и переменных?\n").split())
 
     # Ввод ограничений
@@ -113,5 +113,5 @@ def main():
         else:
             print("x{} = 0".format(i + 1))
 
-if __name__ == "main":
-    main()
+__main__()
+input('Press ENTER for EXIT')
