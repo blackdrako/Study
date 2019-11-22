@@ -1,4 +1,4 @@
-import prettytable as pt
+﻿import prettytable as pt
 import fractions as fr
 
 def input_array(n, m, message = ""):
@@ -96,3 +96,4 @@ for i in range(len(tbl.table)-1):
 #    s += "{}X{}+".format(str(koef[i]), i+1)
 #s += "{}X{}->max".format(str(koef[-1]), 5)
 #print("Целевая функция:", s, "\n")
+input('Press ENTER to EXIT')
