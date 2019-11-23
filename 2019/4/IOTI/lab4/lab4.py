@@ -41,7 +41,6 @@ def find_cell(matrix):
 
 basis = []
 
-
 def get_first_base(a, b, c):
     """Получение первого базисного вида
     
@@ -360,3 +359,4 @@ def __main__():
 
 
 __main__()
+input('Press ENTER to EXIT')
