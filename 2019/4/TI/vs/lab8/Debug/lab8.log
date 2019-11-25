@@ -1,0 +1,26 @@
+﻿  bch_code.cpp
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.h(21,23): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\git\Study\2019\4\TI\vs\lab8\bch_code.cpp(7,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\bch_code.cpp(62,30): warning C4018: >: несоответствие типов со знаком и без знака
+  cyclic_coding.cpp
+D:\git\Study\2019\4\TI\vs\lab8\bch_code.cpp(73,27): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.h(21,23): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(14,28): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(93,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(135,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(159,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(236,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(237,27): warning C4018: <: несоответствие типов со знаком и без знака
+  lab8.cpp
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.cpp(280,14): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\cyclic_coding.h(21,23): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(19,21): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(27,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(38,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(39,21): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(46,21): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(54,21): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(59,21): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
+D:\git\Study\2019\4\TI\vs\lab8\lab8.cpp(70,20): warning C4018: <: несоответствие типов со знаком и без знака
+  lab8.vcxproj -> D:\git\Study\2019\4\TI\vs\lab8\Debug\lab8.exe
