@@ -1,0 +1,8 @@
+﻿  koshi.cpp
+D:\git\Study\2019\4\SISMOD\Лаб6-7\rungekytta\rungekytta\koshi.cpp(19,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\SISMOD\Лаб6-7\rungekytta\rungekytta\koshi.cpp(41,20): warning C4018: <=: несоответствие типов со знаком и без знака
+D:\git\Study\2019\4\SISMOD\Лаб6-7\rungekytta\rungekytta\koshi.cpp(59,60): error C2668: abs: неоднозначный вызов перегруженной функции
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdlib.h(364,22): message : может быть "__int64 abs(const __int64) throw()"
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdlib.h(359,17): message : или       "long abs(const long) throw()"
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdlib.h(289,34): message : или       "int abs(int)"
+D:\git\Study\2019\4\SISMOD\Лаб6-7\rungekytta\rungekytta\koshi.cpp(59,60): message : при попытке сопоставить список аргументов "(double)"
