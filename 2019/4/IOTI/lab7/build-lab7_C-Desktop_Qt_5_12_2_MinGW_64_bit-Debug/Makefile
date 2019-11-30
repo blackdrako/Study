@@ -224,6 +224,7 @@ Makefile: ../lab7_C/lab7_C.pro D:/Programms/qt/5.12.2/mingw73_64/mkspecs/win32-g
 		D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/qt_config.prf \
 		D:/Programms/qt/5.12.2/mingw73_64/mkspecs/win32-g++/qmake.conf \
 		D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/exclusive_builds.prf \
 		D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/toolchain.prf \
 		D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/default_pre.prf \
@@ -408,6 +409,7 @@ D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/qt_functions.prf:
 D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/qt_config.prf:
 D:/Programms/qt/5.12.2/mingw73_64/mkspecs/win32-g++/qmake.conf:
 D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/exclusive_builds.prf:
 D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/toolchain.prf:
 D:/Programms/qt/5.12.2/mingw73_64/mkspecs/features/default_pre.prf:
