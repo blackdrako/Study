@@ -1,0 +1,13 @@
+debug/colors.o
+debug/main.o
+debug/mainwindow.o
+debug/metrics.o
+debug/otherapi.o
+debug/systeminfo.o
+debug/systemparams.o
+debug/systemtime.o
+debug/moc_colors.o
+debug/moc_mainwindow.o
+debug/moc_otherapi.o
+debug/moc_systemparams.o
+debug/moc_systemtime.o

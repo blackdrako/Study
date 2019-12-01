@@ -1,0 +1,13 @@
+release/colors.o
+release/main.o
+release/mainwindow.o
+release/metrics.o
+release/otherapi.o
+release/systeminfo.o
+release/systemparams.o
+release/systemtime.o
+release/moc_colors.o
+release/moc_mainwindow.o
+release/moc_otherapi.o
+release/moc_systemparams.o
+release/moc_systemtime.o
