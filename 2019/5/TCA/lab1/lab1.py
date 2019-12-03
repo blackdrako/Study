@@ -54,7 +54,7 @@ print("Таблица истинности исходной функции:")
 for _ in range(2**var_count):
     str_bs = custom_bin(bit_set)     # Вектор переменных x1 - x5
     if bool(eval(
-         ({1}{2}0-{3}{4}{5})=-3
+         ((1)(2)(0)-(3)(4)(5))=-3
     table[bit_set] = int(
         eval(
             '-2 <= ({0} - {1}) and ({0} - {1}) < 3'.format(  # Условие -2 <=(x1x20-x3x4x5)<3

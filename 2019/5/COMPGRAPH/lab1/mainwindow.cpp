@@ -44,8 +44,8 @@ void MainWindow::paintEvent(QPaintEvent* event)
      return;
 
     if (width() > height()) // Если ширина окна больше высоты
-     a = (height() - 200) / 2; // Отступ от краёв - 10 пикселей
-    else a = (width() - 200) / 2;
+     a = (height() - sqrt(2)*a) / 2;
+    else a = (width() - sqrt(2)*a) / 2;
 
     QColor orangeRed(240, 100, 0);
     double d=(a*sqrt(2))/2;
@@ -111,7 +111,7 @@ void MainWindow::paintEvent(QPaintEvent* event)
     QPointF start_2 = QPointF(-a/4-angle,A_big.y()-a/4-angle);
     QPointF start_3 = QPointF(D_big.x()-a/4+angle,-a/4-angle);
     QPointF start_4 = QPointF(-a/4+angle,C_big.y()-a/4+angle);
-    if(start_1.x()-a/4 < -a/4){
+    if(start_1.x()-a/4 < -a/2){
         angle = 0;
     }
     painter.setBrush(Qt::red);
