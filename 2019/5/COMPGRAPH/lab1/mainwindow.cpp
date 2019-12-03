@@ -127,8 +127,10 @@ void MainWindow::paintEvent(QPaintEvent* event)
     painter.drawEllipse(s4);
 }
 
-void MainWindow::wheelEvent(QWheelEvent* wheelevent)
+void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    angle -= (wheelevent->delta()/20)*(-1);
+    if(event->key() == Qt::Key_0){
+        angle=angle+4;
+    }
     repaint(); // Обновляем окно
 }

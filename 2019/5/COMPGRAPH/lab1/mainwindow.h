@@ -34,8 +34,7 @@ private:
     QPolygonF dravPol(QPointF C,int count,double R);
     // Обработчик события перерисовки окна
     void paintEvent(QPaintEvent* event);
-
-    void wheelEvent(QWheelEvent* );
+    void keyPressEvent(QKeyEvent*);
 };
 
 #endif // MAINWINDOW_H
