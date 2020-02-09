@@ -8,19 +8,10 @@ Window::Window()
 {
     renderArea = new RenderArea;
 
-    shapeComboBox = new QComboBox;
-    shapeComboBox->addItem(tr("Polygon"), RenderArea::Polygon);
-    shapeComboBox->addItem(tr("Rectangle"), RenderArea::Rect);
-    shapeComboBox->addItem(tr("Rounded Rectangle"), RenderArea::RoundedRect);
-    shapeComboBox->addItem(tr("Ellipse"), RenderArea::Ellipse);
-    shapeComboBox->addItem(tr("Pie"), RenderArea::Pie);
-    shapeComboBox->addItem(tr("Chord"), RenderArea::Chord);
-    shapeComboBox->addItem(tr("Path"), RenderArea::Path);
-    shapeComboBox->addItem(tr("Line"), RenderArea::Line);
-    shapeComboBox->addItem(tr("Polyline"), RenderArea::Polyline);
-    shapeComboBox->addItem(tr("Arc"), RenderArea::Arc);
-    shapeLabel = new QLabel(tr("&Shape:"));
-    shapeLabel->setBuddy(shapeComboBox);
+    LoadGameButton = new QPushButton;
+    LoadGameButton->setText("Load Game");
+    SaveGameButton->setText("Save Game");
+    ExitGameButton->setText("Exit");
 
     penWidthSpinBox = new QSpinBox;
     penWidthSpinBox->setRange(0, 10);
@@ -69,19 +60,18 @@ Window::Window()
     brushColorLabel->setBuddy(brushColorComboBox);
 
 
-    connect(shapeComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::shapeChanged);
+    /*connect(shapeComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::shapeChanged);
     connect(penWidthSpinBox, QOverload<int>::of(&QSpinBox::valueChanged),this, &Window::penChanged);
     connect(penStyleComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::penChanged);
     connect(penColorComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::penChanged);
     connect(brushStyleComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::brushChanged);
-    connect(brushColorComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::brushChanged);
+    connect(brushColorComboBox, QOverload<int>::of(&QComboBox::activated),this, &Window::brushChanged);*/
 
     QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setColumnStretch(0, 1);
     mainLayout->setColumnStretch(3, 1);
     mainLayout->addWidget(renderArea, 0, 0, 1, 4);
-    mainLayout->addWidget(shapeLabel, 2, 0, Qt::AlignRight);
-    mainLayout->addWidget(shapeComboBox, 2, 1);
+    mainLayout->addWidget(ExitGameButton, 2, 0, Qt::AlignRight);
     mainLayout->addWidget(penWidthLabel, 3, 0, Qt::AlignRight);
     mainLayout->addWidget(penWidthSpinBox, 3, 1);
     mainLayout->addWidget(penStyleLabel, 4, 0, Qt::AlignRight);
@@ -94,31 +84,29 @@ Window::Window()
     mainLayout->addWidget(brushColorComboBox, 5, 3, Qt::AlignRight);
     setLayout(mainLayout);
 
-    shapeChanged();
-    penChanged();
-    brushChanged();
 
     setWindowTitle(tr("Basic Drawing"));
 }
 
-void Window::shapeChanged()
+/*void Window::shapeChanged()
 {
     RenderArea::Shape shape = RenderArea::Shape(shapeComboBox->itemData(shapeComboBox->currentIndex(), IdRole).toInt());
     renderArea->setShape(shape);
-}
+}*/
 
-void Window::penChanged()
+/*void Window::penChanged()
 {
     int width = penWidthSpinBox->value();
     Qt::PenStyle style = Qt::PenStyle(penStyleComboBox->itemData(penStyleComboBox->currentIndex(), IdRole).toInt());
     Qt::GlobalColor color = Qt::GlobalColor(penColorComboBox->itemData(penColorComboBox->currentIndex(), IdRole).toInt());
 
     renderArea->setPen(QPen(color, width, style));
-}
+}*/
 
-void Window::brushChanged()
+/*void Window::brushChanged()
 {
     Qt::GlobalColor color = Qt::GlobalColor(brushColorComboBox->itemData(brushColorComboBox->currentIndex(),IdRole).toInt());
     Qt::BrushStyle style = Qt::BrushStyle(brushStyleComboBox->itemData(brushStyleComboBox->currentIndex(), IdRole).toInt());
     renderArea->setBrush(QBrush(color, style));
 }
+*/

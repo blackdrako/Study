@@ -7,15 +7,14 @@ import matplotlib.pyplot as plt
 def function(args, t):
     # Константы
     g = 9.8
-    n = 10
-    k = 5
-    m = 1
+    n = 8
+    k = 3
+    m = 2
 
     # Распаковываем набор переменных
     x, v = args
 
-    return [v,
-            g - (x-n)*k/m]
+    return [v,g - (x-n)*k/m]
 
 
 def main():
