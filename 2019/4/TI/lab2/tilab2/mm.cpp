@@ -235,3 +235,20 @@ double matr_ent(double** a,unsigned n,unsigned m){
     return -entropy;
     }
 }
+
+//Совместная энтропия
+double coop_ent(double** a,double** b,unsigned n,unsigned m){
+    for (long unsigned int i = 0; i < n; i++) {
+        for (long unsigned int j = m; i < m; j++) {
+
+        }
+    }
+}
+//Условная энтропия
+double cond_ent(double** probs,unsigned n,unsigned m){
+    for (long unsigned int i = 0; i < n; i++) {
+        for (long unsigned int j = m; i < m; j++) {
+
+        }
+    }
+}

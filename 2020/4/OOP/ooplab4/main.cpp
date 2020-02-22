@@ -2,13 +2,6 @@
 #include <QTextCodec>
 #include <QTextStream>
 #include <iostream>
-//Var 4
-using namespace std;
-class Car
-{
-public:
-    Car() {}
-};
 
 
 int main(int argc, char *argv[])
