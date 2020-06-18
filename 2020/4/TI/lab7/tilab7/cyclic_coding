@@ -1,0 +1,6 @@
+#include "cyclic_coding"
+
+cyclic_coding::cyclic_coding()
+{
+
+}
