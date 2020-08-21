@@ -7,13 +7,11 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <conio.h>
 
 /*
 // Конструируется многочлен начиная с младшей степени
-// Здесь, к примеру, будет 1 + x^2
-bool c1[size] = {1, 0, 1};
-Polynomial p1(c1);
-// А здесь (0 + 0x +) x^2 + x^3
+// здесь (0 + 0x +) x^2 + x^3
 bool c2[size] = {0, 0, 1, 1};
  */
 
@@ -41,26 +39,26 @@ bool c2[size] = {0, 0, 1, 1};
 const size_t size = 15;
 
 const bool epsilon[][size] = {
-        {0},        // 0
         {1},        // 1
         {0, 1},     // e
         {0, 0, 1},  // e2
-        {0, 0, 0, 1},     // e3 = e + 1
-        {1, 1},  // e4 = e2 + e
-        {0, 1, 1},  // e5 = e2 + e +1
-        {0, 0, 1, 1}, //e6 = e2 + 1
-        {1, 1, 0, 1},
-        {1, 0, 1},
-        {0, 1, 0, 1},
-        {1, 1, 1},
-        {0, 1, 1, 1},
-        {1, 1, 1, 1},
-        {1, 0, 1, 1},
-        {1, 0, 0, 1}
+        {0, 0, 0, 1},     // e3 = e3
+        {1, 0, 0, 1},  // e4 = e3 + 1
+        {1, 1, 1},  // e5 = e3 + e +1
+        {1, 0, 1},   // e6 = e3 + e2 + e + 1
+        {}, //e7= e2 + e + 1
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
 };
 
-const bool const_g[size] = {1, 1, 0, 0, 1};    // Соответствует x3+x+1
-const bool const_xr[size] = {0, 0, 0, 0, 1};   // Соответствует x3
+const bool const_g[size] = {1, 1, 0, 0, 1};    // Соответствует x4+x+1
+const bool const_xr[size] = {0, 0, 0, 0, 1};   // Соответствует x4
 
 class Polynomial{
 private:
@@ -102,4 +100,5 @@ public:
     friend const Polynomial operator>>(const Polynomial& left, size_t offset);
     int error_digit();
 };
+
 #endif // POLYNOM_H

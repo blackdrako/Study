@@ -110,4 +110,3 @@ while exit_flag:
         enth_common = abs(enthropy(common_matr))
         inf_common = enth_a+enth_b-enth_common
         print("Вычисленные значения энтропии\nH(A): {0:.2}\tH(B): {1:.2}\nH(B/A): {2:.2}\tH(A/B): {3:.2}\nH(A,B): {4:.2}\tI(A,B): {5:.2}".format(enth_a, enth_b, enth_ba, enth_ab, enth_common, inf_common))
-    exit_flag = ui.get_user_input("Продолжить? ")

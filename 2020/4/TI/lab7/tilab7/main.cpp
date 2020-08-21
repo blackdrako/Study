@@ -20,11 +20,10 @@ int main(int argc, char *argv[])
     cout << "r = 4" << endl;
     ifstream f;
     f.open("inp.txt", ifstream::in);
-    //блоки по 7
     vector<int> info;
     string inp;
     f >> inp;
-    cout << endl << "Прочитаное сообщение: " << inp << endl << "Длина сообщения: " << inp.length() << endl;
+    cout << endl << QString::fromUtf8("Прочитаное сообщение: ").toLocal8Bit().data() << inp << endl << QString::fromUtf8("Длина сообщения: ").toLocal8Bit().data() << inp.length() << endl;
     int count = 0;
 
     int pos = 0, added = 0; count = 0;
@@ -84,10 +83,10 @@ int main(int argc, char *argv[])
 
         info.clear();
     }
-    cout << endl << "Информ. слово \t Кодов. слово \t\t Принят. слово \t\t Ошибка в битах:"<< endl;
+    cout << endl << QString::fromUtf8("Информ. слово \t Кодов. слово \t\t Принят. слово \t\t Ошибка в битах:").toLocal8Bit().data()<< endl;
     for (int i = 0; i < inp.length() / 7; i++) {
         cout << res[i] << endl;
     }
-    cout << endl << "Результат кодирования: "<< endl << outp << endl;
+    cout << endl << QString::fromUtf8("Результат кодирования: ").toLocal8Bit().data()<< endl << outp << endl;
     return app.exec();
 }

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
+#include <QTextCodec>
 
 void dellNull(std::vector<int>& x1);
 std::vector<int> operator * (const std::vector<int>& x1, const std::vector<int>& x2);

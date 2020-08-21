@@ -129,7 +129,7 @@ std::string Polynomial::str_epsilon() {
             if (more_than_one){
                 result << "+";
             }
-            result << Polynomial(epsilon[i % 15 + 1]).str('e');
+            result << Polynomial(epsilon[i % 7 + 1]).str('e');
             more_than_one = true;
         }
     }
@@ -194,7 +194,7 @@ Polynomial Polynomial::sum_epsilon() {
         if (coefficients[i]){
             for (int j = 0; j < size; j++){
                 // Делаем XOR для строки эпсилонов
-                new_coefficients[j] = new_coefficients[j] != epsilon[i % 15 + 1][j];
+                new_coefficients[j] = new_coefficients[j] != epsilon[i % 7 + 1][j];
             }
         }
     }
@@ -302,3 +302,4 @@ const Polynomial operator%(const Polynomial &left, const Polynomial &right) {
     Polynomial::divide(left, right, &res, &rem);
     return *rem;
 }
+

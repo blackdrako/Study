@@ -25,21 +25,19 @@ int choose(std::string s, int min, int max){
 /*
  * Конвертация строки в массив булев
  */
-// С конца строки копируем ее в массив. То есть, строка 1011 создаст массив 1, 1, 0, 1, 0, 0, ...
+// С конца строки копируем ее в массив.
 void str_to_bools(std::string s, bool a[]){
     int i = 0;
     for (std::string::iterator it=s.begin(); it!=s.end(); it++) {
-        //std::cout << *it << std::endl;
         a[i] = *it - '0';
-        //std::cout << i << a[i] << std::endl;
         i++;
     }
     while (i < size){
         a[i] = 0;
         i++;
     }
-    //std::cout << std::endl;
 }
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -50,99 +48,81 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_LINUX
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 #endif
-    system("chcp 65001");
-    std::string a[100];
-    std::string M;
-    std::string M_cod;
+    int count = 0;
+    // Инициализируем ГПСЧ
+    srand(time(NULL));
+    // Флаг выхода
+    bool exit_f = false;
 
-    std::string MMM = "";
+    while (!exit_f) {
 
-    std::string i_str;
-    std::string raw_str;
 
-    char* f_name;
-    std::ifstream f_in;
-   //     std::cin >> f_name;
-   int f;
-   std::cout << "выберите способ ввода (0 - клавиатуры / 1 - файл)  :  ";
-   std::cin >> f;
-   std::string new_msg;
-   switch (f)
-   {
-   case 0:
-        std::cin >> new_msg;
-        break;
-   case 1:
-        f_name = "message.txt";
+        std::string i_str;
+        std::string raw_str;
+
+        std::string f_name;
+        std::ifstream f_in;
+        f_name = "inp.txt";
         f_in.open(f_name);
-        f_in >> new_msg;
-        break;
-   }
-
-    int RR = 4;
-    int NN = 1;
-    for (int i = 0; i < RR; i++)
-        NN = NN*2;
-    NN = NN - 1;
-    int KK = NN - RR;
-
-
-        std::cout << "\n\n\nпрочитана последовательность: \n" << new_msg << "(" << new_msg.length() <<")" <<std::endl;
-//        int QW = new_msg.length() % KK;
-//        if (QW != 0)
-//        {
-//            std::cout << "дополним в конец сообщения " << (KK - QW) % KK << " битами 0\n";
-//            for (int i = 0; i < (KK - QW) % KK; i++)
-//                new_msg += "0";
-//        }
-//
-//        std::cout << "допишем в начало сообщения " << KK << "бит с количеством дополненных символов = "<< (KK - QW) % KK << "\n";
-//        std::string new_block = to_dv(KK, (KK - QW) % KK);
-//
-//
-//
-//        std::cout << new_block << new_msg << "(" << new_msg.length() + new_block.length() <<")"<< "\n";
-        for (int i = new_msg.length() - 1; i >= 0; i--)
-            raw_str = raw_str + new_msg[i];
-//        for (int i = 0; i < new_block.length(); i++)
-//            raw_str = new_block[i] + raw_str;
+        std::cin >> raw_str;
+        std::cout << QString::fromUtf8("Прочитано: ").toLocal8Bit().data() << raw_str << std::endl;
+        std::cout << QString::fromUtf8("Длина сообщения - ").toLocal8Bit().data() << raw_str.length() << std::endl;
+        std::cout << QString::fromUtf8("Кодируем ее блоками по ").toLocal8Bit().data() << 4 << std::endl ;
         f_in.close();
-
+        int tcount = 0;
+        std::cout << QString::fromUtf8("Добавим 4 бита, в котором укажем, сколько битов было добавлено к последнему блоку").toLocal8Bit().data() << std::endl << std::endl;
+        if (raw_str.length() % 4 != 0) {
+            int tmp = raw_str.length() % 4;
+            switch (tmp) {
+            case 1:
+                raw_str = "0011" + raw_str;
+                raw_str += "000";
+                break;
+            case 2:
+                raw_str = "0010" + raw_str;
+                raw_str += "00";
+                break;
+            case 3:
+                raw_str = "0001" + raw_str;
+                raw_str += "0";
+                break;
+            }
+        }
+        else {
+            raw_str = "0000" + raw_str;
+        }
+        int pos = 0;
+        std::string *res = new std::string[raw_str.length() / 4];
+        for (int i = 0; i < raw_str.length(); i++) {
+            res[pos] += raw_str[i];
+            tcount++;
+            if (tcount == 4) {
+                res[pos] += " ";
+                pos++;
+                tcount = 0;
+            }
+        }
+        pos = 0;
         std::string::iterator it = raw_str.begin();
-//////        srand(time(NULL));
-//////        int ran = rand() % (raw_str.length() / k);
         // Заменить 4 на реальную длину
-//////        printf("\n\n\nERROR = %i\n\n\n",ran);
-//////        QW = 0;
-        while(it + KK <= raw_str.end()) {
-
+        while(it + 4 <= raw_str.end()) {
+            count++;
             i_str.clear();
-            i_str.resize(KK);
-            for (int i = 0; i < KK; i++){
+            i_str.resize(4);
+            for (int i = 0; i<4; i++){
                 i_str[i] = *it;
                 it++;
             }
-            std::cout << "Кодируем блок: ";
-            for (int j = i_str.length() - 1; j >= 0; j--)
-                std::cout << i_str[j];
-            std::cout << std::endl;
-
+            //std::cout << "Кодируем блок: " << i_str << std::endl;
             bool i_array[size];
             str_to_bools(i_str, i_array);
             Polynomial i(i_array);
-            std::cout << "Информационное слово i(x) = " << i.str() << std::endl << std::endl;
-//////            if (QW == ran)
-//////            {
-//////                int er = rand() % n;
-//////                printf("произошла ошибка %i бите\n", er);
-//////                i_str[er] ^= 1;
-//////                std::cout << i_str << std::endl;
-//////            }
-//////            QW++;
-            // Кодирование
+            std::cout << i_str << " ~ " << "i(x)=" << i.str() << "\t";
+
+            /// Кодирование
             Polynomial g(const_g);
             Polynomial xr(const_xr);
-            std::cout << "Получаем кодовое слово по формуле c(x) = x^r * i(x) + Rem_g(x) (x^r * i(x))" << std::endl;
+            std::cout << QString::fromUtf8("Получаем кодовое слово по формуле c(x) = x^r * i(x) + Rem_g(x) (x^r * i(x))").toLocal8Bit().data() << std::endl;
             std::cout << "g(x) = " << g.str() << std::endl;
             std::cout << "x^r = " << xr.str() << std::endl;
             Polynomial t = xr * i;
@@ -150,80 +130,87 @@ int main(int argc, char *argv[])
             Polynomial r = t % g;
             std::cout << "Rem = (x^r * i(x)) % g(x) = " << r.str() << std::endl;
             Polynomial c = t + r;
+            std::cout << QString::fromUtf8(" Отправлено: с(х)=").toLocal8Bit().data() << c.str() << "\t";
+            res[pos] += " \t ";
+            res[pos] += c.str_bit();
             std::cout << "c(x) = x^r * i(x) + Rem = " << c.str() << std::endl;
-            std::cout << "В канал связи передается последовательность ";
-            for (int j = c.str_bit().length() - 1; j >= 0 ; j--)
-                std::cout << c.str_bit()[j];
-             std::cout << std::endl << std::endl;
+            std::cout << QString::fromUtf8("В канал связи передается последовательность ").toLocal8Bit().data() << c.str_bit() << std::endl << std::endl;
 
             bool corrupt_bit;
 
-            // выбираем, какой бит убить к чертям собачьим
+            // выбираем, какой бит
 
-            // Надо ли вообще вносить ошибку?
-            corrupt_bit = 1; // Вероятность не получить ошибку 1/3
-                         /*
+
+            //corrupt_bit = rand() % 3; // Вероятность не получить ошибку 1/3
+
             // Если ошибку требуется вносить всегда, выбери эту строку
             corrupt_bit = true;
-            */
+
             // Если выбираем внесение ошибки вручную, выбери эту строку
             //corrupt_bit = choose("Внести ошибку в передаваемое сообщение? 1 - не вносить, 2 - внести: ", 1, 2) - 1;
 
             Polynomial y;
-            std::string MM = "";
+
             if (corrupt_bit) {
-                int bit = 7;
+                int bit = 10;
                 Polynomial e(bit, size);
-                std::cout << "Вносим ошибку в " << bit
-                          << "-й бит передаваемого слова c, получаем слово y(x) = c(x) + e(x)" << std::endl;
+                std::cout << QString::fromUtf8("Вносим ошибку в ").toLocal8Bit().data() << bit << QString::fromUtf8("-й бит передаваемого слова c, получаем слово y(x) = c(x) + e(x)").toLocal8Bit().data() << std::endl;
                 y = c + e;
                 std::cout << "y(x) = " << c.str() << " + " << e.str() << " = " << y.str() << std::endl << std::endl;
-                std::cout << "Декодер принял последовательность ";
-                for (int j = y.str_bit().length() - 1; j >= 0; j--)
-                    std::cout << y.str_bit()[j];
-                std::cout<< std::endl;
-                std::cout << "Для проверки правильности принятого кода вычисляем y(e) = ";
-                std::cout << y.str_epsilon() << " = ";
+                std::cout << QString::fromUtf8("\tПринято: у(х)=").toLocal8Bit().data() << y.str() << " ";
+                res[pos] += " \t "; res[pos] += y.str_bit();
+                //std::cout << QString::fromUtf8("Декодер принял последовательность " << y.str_bit() << std::endl;
+                //std::cout << y.str_bit();
+                //std::cout << QString::fromUtf8("Для проверки правильности принятого кода вычисляем y(e) = ";
+                std::cout << std::endl <<"y(e)=" << y.str_epsilon() << "=";
                 Polynomial syndrome = y.sum_epsilon();
                 std::cout << syndrome.str('e');
                 int e_d = syndrome.error_digit();
-                // Тут будет грязно
-                if (e_d >= 3) {
-                    std::cout << " = e" << e_d;
-                }
-                std::cout << std::endl;
 
-                std::cout << "Ошибка произошла в " << e_d << "-м бите" << std::endl << std::endl;
+                if (e_d >= 3) {
+                    std::cout << "=e" << e_d;
+                }
+                //std::cout << std::endl;
+
+                //std::cout << "Ошибка произошла в " << e_d << "-м бите" << std::endl << std::endl;
                 Polynomial re_e(e_d, size);
                 y += re_e;
-                std::cout << "Чтобы исправить ошибку, выполним сложение y(x) = y(x) + e(x) = " << y.str() << std::endl
-                          << std::endl;
+                res[pos] += " \t "; res[pos] += std::to_string(e_d);
+                //std::cout << y.str() << "\t";
+                //std::cout << "Чтобы исправить ошибку, выполним сложение y(x) = y(x) + e(x) = " << y.str() << std::endl << std::endl;
             } else {
                 y = c;
             }
 
-            std::cout << "Для проверки правильности принятого кода вычисляем y(e) = ";
-            std::cout << y.str_epsilon() << " = ";
+            //std::cout << "Для проверки правильности принятого кода вычисляем y(e) = ";
+           // std::cout << y.str_epsilon() << " = ";
             Polynomial syndrome = y.sum_epsilon();
-            std::cout << syndrome.str('e') << std::endl;
+            //std::cout << syndrome.str('e'); //<< std::endl;
             int e_d = syndrome.error_digit();
             if (e_d == -1) {
-                std::cout << "Ошибок не обнаружено" << std::endl << std::endl;
+               //std::cout << "Ошибок не обнаружено" << std::endl << std::endl;
             } else {
-                std::cout << "Ошибка произошла в " << e_d << "-м бите" << std::endl;
+               //std::cout << "Ошибка произошла в " << e_d << "-м бите" << std::endl;
             }
 
-            y <<= RR;
-            std::string M = y.str_bit();
-            M.erase(KK);
-            std::cout << "Отбрасываем проверочные биты, получаем многочлен " << y.str() << std::endl;
-            std::cout << "Он соответствует информационному слову ";
-            for (int j = M.length() - 1; j >= 0; j--)
-                std::cout << M[j];
-            std::cout << std::endl << std::endl;
-            MMM += M;
-     //       getch();
+            y <<= 3;
+            //std::cout << "Отбрасываем проверочные биты, получаем многочлен " << y.str() << std::endl;
+            std::cout << QString::fromUtf8("\tРез. декодирования: i(x)=").toLocal8Bit().data() << y.str() << std::endl;// << "=" << y.str_bit() << std::endl;
+            //std::cout << "Он соответствует информационному слову " << y.str_bit() << std::endl << std::endl;
+            //std::cout << y.str_bit();
+            pos++;
+            getchar();
+            if ((raw_str.length() - count * 4) < 4) {
+                std::cout << QString::fromUtf8("Сообщ.   Кодов. сл. \t С ошибкой \tСиндром").toLocal8Bit().data() << std::endl;
+                for (int i = 0; i < raw_str.length() / 4; i++) {
+                    std::cout << res[i] << std::endl;
+                }
+                std::cout << QString::fromUtf8("Содержимое файла успешно закодировано.").toLocal8Bit().data() << std::endl;
+                exit(0);
+            }
         }
-
+        std::cout << QString::fromUtf8("Содержимое файла успешно закодировано.").toLocal8Bit().data() << std::endl;
+        exit_f = (choose(QString::fromUtf8("Повторить операцию кодирования/декодирования? 1 - да, 2 - нет").toLocal8Bit().data(), 1, 2) == 2);
+    }
     return app.exec();
 }

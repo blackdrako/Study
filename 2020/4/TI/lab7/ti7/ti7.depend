@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1527170801 source:c:\users\acer\desktop\labs\2\ti\ti7 αχυ\ti7\bch_code.cpp
+	"bch_code.h"
+
+1527598721 c:\users\acer\desktop\labs\2\ti\ti7 αχυ\ti7\bch_code.h
+	"cyclic_coding.h"
+
+1527104581 c:\users\acer\desktop\labs\2\ti\ti7 αχυ\ti7\cyclic_coding.h
+	<vector>
+	<random>
+	<time.h>
+	<iostream>
+	<algorithm>
+	<iterator>
+
+1527600633 source:c:\users\acer\desktop\labs\2\ti\ti7 αχυ\ti7\cyclic_coding.cpp
+	"cyclic_coding.h"
+
+1527599897 source:c:\users\acer\desktop\labs\2\ti\ti7 αχυ\ti7\main.cpp
+	<iostream>
+	"bch_code.h"
+

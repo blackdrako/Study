@@ -16,11 +16,11 @@ std::vector<int> BCH::getS3(const std::vector<int>& y)
 std::vector<int> BCH::decoding(std::vector<int>& code)
 {
     output_bound();
-    std::cout << "Декодирование: " << std::endl;
-    std::cout << "Принятое слово y = ";
+    std::cout << QString::fromUtf8("Декодирование: ").toLocal8Bit().data() << std::endl;
+    std::cout << QString::fromUtf8("Принятое слово y = ").toLocal8Bit().data();
     output_vector(code);
     std::cout << std::endl;
-    std::cout << "Принятый многочлен y(x) = " << code << std::endl;
+    std::cout << QString::fromUtf8("Принятый многочлен y(x) = ").toLocal8Bit().data() << code << std::endl;
     std::cout << "\nS1 = y(E) = ";
     std::vector<int> S1 = computeE(code);
     std::vector<int> S3 = getS3(code);
@@ -52,7 +52,7 @@ std::vector<int> BCH::decoding(std::vector<int>& code)
         output_E(S1);
         std::cout << ") * X + ";
         output_E(res);
-        std::cout << "\nКорни уравнения: " << std::endl;
+        std::cout << QString::fromUtf8("\nКорни уравнения: ").toLocal8Bit().data() << std::endl;
         std::vector<int> mistakes;
         for (int i = 0; i < n_; i++) {
             std::cout << "f(e" << i << ")\t = ";
@@ -65,7 +65,7 @@ std::vector<int> BCH::decoding(std::vector<int>& code)
                 output_E(solve);
             }
             if (!solve.size()) {
-                std::cout << "\nОшибка в " << i << " бите";
+                std::cout << QString::fromUtf8("\nОшибка в ").toLocal8Bit().data() << i << QString::fromUtf8(" бите").toLocal8Bit().data();
                 mistakes.push_back(i);
             }
             std::cout << std::endl;
@@ -73,7 +73,7 @@ std::vector<int> BCH::decoding(std::vector<int>& code)
         for (int i = 0; i < mistakes.size(); i++) {
             code[mistakes[i]] = (code[mistakes[i]]) ? 0 : 1;
         }
-        std::cout << "Исправленное кодовое слово:\n"
+        std::cout << QString::fromUtf8("Исправленное кодовое слово:\n").toLocal8Bit().data()
             << "c(x) = " << code <<
             "\nc = ";
         output_vector(code);
@@ -81,10 +81,10 @@ std::vector<int> BCH::decoding(std::vector<int>& code)
     }
 
     std::copy(code.begin() + n_ - k_, code.end(), info.begin());
-    std::cout << "Информационное слово i = ";
+    std::cout << QString::fromUtf8("Информационное слово i = ").toLocal8Bit().data();
     output_vector(info);
     std::cout << std::endl;
-    std::cout << "Информационный многочлен i(x) = " << info << std::endl;
+    std::cout << QString::fromUtf8("Информационный многочлен i(x) = ").toLocal8Bit().data() << info << std::endl;
     output_bound();
     return info;
 }

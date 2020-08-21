@@ -31,17 +31,17 @@ std::vector<int> CyclicCode::coding(const std::vector<int> & info){
     std::vector<int> code = xr_i + rest;
     output_bound();
     std::cout << "" << std::endl;
-    std::cout << "Информационное слово i = ";
+    std::cout << QString::fromUtf8("Информационное слово i = ").toLocal8Bit().data();
     output_vector(info);
     std::cout << std::endl;
-    std::cout << "Информационный многочлен i(x) = "<< info << std::endl;
+    std::cout << QString::fromUtf8("Информационный многочлен i(x) = ").toLocal8Bit().data()<< info << std::endl;
     std::cout << "x^r * i(x) = " << xr << " * (" << info << ")" << " = " << xr_i << std::endl;
-    std::cout << "Остаток от деления Res(x) = " << rest << std::endl;
+    std::cout << QString::fromUtf8("Остаток от деления Res(x) = ").toLocal8Bit().data() << rest << std::endl;
     code.resize(n_, 0);
-    std::cout << "Кодовое слово с = ";
+    std::cout << QString::fromUtf8("Кодовое слово с = ").toLocal8Bit().data();
     output_vector(code);
     std::cout << std::endl;
-    std::cout << "Кодовый многочлен с(x) = "<< code << std::endl;
+    std::cout << QString::fromUtf8("Кодовый многочлен с(x) = ").toLocal8Bit().data()<< code << std::endl;
     output_bound();
     return code;
 }
@@ -49,10 +49,10 @@ std::vector<int> CyclicCode::coding(const std::vector<int> & info){
 std::vector<int> CyclicCode::decoding(std::vector<int> & code){
     output_bound();
     std::cout << "" << std::endl;
-    std::cout << "Принятое слово y = ";
+    std::cout << QString::fromUtf8("Принятое слово y = ").toLocal8Bit().data();
     output_vector(code);
     std::cout << std::endl;
-    std::cout << "Принятый многочлен y(x) = "<< code << std::endl;
+    std::cout << QString::fromUtf8("Принятый многочлен y(x) = ").toLocal8Bit().data()<< code << std::endl;
     std::cout << "y(e) = ";
     std::vector<int> c_code = computeE(code);
     std::vector<int> info(k_);
@@ -69,24 +69,24 @@ std::vector<int> CyclicCode::decoding(std::vector<int> & code){
         if (i >= r_) {
             std::cout << " = e" << i;
         }
-        std::cout << "Ошибка в " << i << " бите " << std::endl;
+        std::cout << QString::fromUtf8("Ошибка в ").toLocal8Bit().data() << i << QString::fromUtf8(" бите ").toLocal8Bit().data() << std::endl;
         code[i] = (code[i]) ? 0 : 1;
-        std::cout << "Исправленное слово с(x) = {";
+        std::cout << QString::fromUtf8("Исправленное слово с(x) = {").toLocal8Bit().data();
         output_vector(code);
         std::cout << "}" << std::endl;
     }
     std::copy(code.begin() + n_ - k_, code.end(), info.begin());
-    std::cout << "Информационное слово i = ";
+    std::cout << QString::fromUtf8("Информационное слово i = ").toLocal8Bit().data();
     output_vector(info);
     std::cout << std::endl;
-    std::cout << "Информационный многочлен i(x) = "<< info << std::endl;
+    std::cout << QString::fromUtf8("Информационный многочлен i(x) = ").toLocal8Bit().data()<< info << std::endl;
     output_bound();
     return info;
 }
 
 void CyclicCode::output_GF()
 {
-    std::cout << "Сгенерированное поле GF(" << "2^" << r_ << "): " << std::endl;
+    std::cout << QString::fromUtf8("Сгенерированное поле GF(").toLocal8Bit().data() << "2^" << r_ << "): " << std::endl;
     for (int i = 0; i < E_.size(); i++) {
         std::cout << "e" << i << " = ";
         output_E(E_[i]);
@@ -151,7 +151,7 @@ std::vector<int> CyclicCode::generate_info()
 std::vector<int> CyclicCode::read_info()
 {
     std::string c;
-    std::cout << "Информационное слово ";
+    std::cout << QString::fromUtf8("Информационное слово ").toLocal8Bit().data();
     std::cin >> c;
     std::vector<int> info(c.size());
     for (int i = 0; i < c.size(); i++)
@@ -172,8 +172,8 @@ std::vector<int> CyclicCode::read_info()
 void CyclicCode::putMistake(std::vector<int> & code)
 {
     int k;
-        std::cout << "0 - сгенерировать ошибку случайным образом " << std::endl;
-        std::cout << "1 - внести ошибку вручную " << std::endl;
+        std::cout << QString::fromUtf8("0 - сгенерировать ошибку случайным образом ").toLocal8Bit().data() << std::endl;
+        std::cout << QString::fromUtf8("1 - внести ошибку вручную ").toLocal8Bit().data() << std::endl;
     //    std::cout << "2 - внести 2 ошибки вручную" << std::endl;
         std::cin >> k;
     //k = 0;
@@ -181,13 +181,13 @@ void CyclicCode::putMistake(std::vector<int> & code)
     {
         int nMistake = 2; //random(0, t_);
         if (nMistake) {
-            std::cout << "Внесем " << nMistake << " ошибок:\n";
+            std::cout << QString::fromUtf8("Внесем ").toLocal8Bit().data() << nMistake << QString::fromUtf8(" ошибок:\n").toLocal8Bit().data();
             for (int i = 0; i < nMistake; i++) {
                 int index = random(0, n_ - 1);
                 code[index] = (code[index]) ? 0 : 1;
-                std::cout << "Внесена ошибка в " << index << " бит" << std::endl;
+                std::cout << QString::fromUtf8("Внесена ошибка в ").toLocal8Bit().data() << index << QString::fromUtf8(" бит").toLocal8Bit().data() << std::endl;
             }
-            std::cout << "Кодовое слово с ошибкой y = ";
+            std::cout << QString::fromUtf8("Кодовое слово с ошибкой y = ").toLocal8Bit().data();
             output_vector(code);
             std::cout << std::endl;
         }
@@ -195,16 +195,16 @@ void CyclicCode::putMistake(std::vector<int> & code)
     else
     {
         int index;
-            std::cout << "Номер бита, в который нужно внести ошибку ";
+            std::cout << QString::fromUtf8("Номер бита, в который нужно внести ошибку ").toLocal8Bit().data();
             std::cin >> index;
             //int index = random(0, n_ - 1);
             code[index] = (code[index]) ? 0 : 1;
             //std::cout << "Внесена ошибка в " << index << " бит." << std::endl;
-            std::cout << "Номер бита, в который нужно внести ошибку ";
+            std::cout << QString::fromUtf8("Номер бита, в который нужно внести ошибку ").toLocal8Bit().data();
             std::cin >> index;
             //int index = random(0, n_ - 1);
             code[index] = (code[index]) ? 0 : 1;
-        std::cout << "Кодовое слово с ошибками y = ";
+        std::cout << QString::fromUtf8("Кодовое слово с ошибками y = ").toLocal8Bit().data();
         output_vector(code);
         std::cout << std::endl;
     }
