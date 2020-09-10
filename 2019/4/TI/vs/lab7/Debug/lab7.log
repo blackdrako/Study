@@ -1,5 +1,0 @@
-﻿  lab7.cpp
-G:\ti\lab7\lab7.cpp(46,15): warning C4244:  аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-G:\ti\lab7\lab7.cpp(94,21): warning C4018:  <: несоответствие типов со знаком и без знака
-G:\ti\lab7\lab7.cpp(204,23): warning C4018:  <: несоответствие типов со знаком и без знака
-  lab7.vcxproj -> G:\ti\lab7\Debug\lab7.exe
