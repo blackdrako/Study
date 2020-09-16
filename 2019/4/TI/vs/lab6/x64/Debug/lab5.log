@@ -1,5 +1,0 @@
-﻿  lab5.cpp
-D:\git\Study\2019\4\TI\vs\lab6\lab5.cpp(40,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\git\Study\2019\4\TI\vs\lab6\lab5.cpp(112,17): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-D:\git\Study\2019\4\TI\vs\lab6\lab5.cpp(137,22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  lab5.vcxproj -> D:\git\Study\2019\4\TI\vs\lab6\x64\Debug\lab5.exe
