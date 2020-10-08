@@ -13,6 +13,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void rotateLine(){
+
+}
+
 void MainWindow::ReadDate()
 {
     bool Ok;
@@ -38,6 +42,7 @@ void MainWindow::paintEvent(QPaintEvent* event)
 
     double a2=a/2;
     double a3=a/3;
+    double a4=a/4;
     double a6=a/6;
 
     double s1 = sqrt(a*a+a2*a2);
@@ -57,7 +62,17 @@ void MainWindow::paintEvent(QPaintEvent* event)
     painter.drawLine(0,-a,a2,0);
 
     painter.drawLine(0,-a+a3,-a3,-a+a3-a6);
-    painter.drawLine(0,-a,-a3,-a+a3+a6);
+    painter.drawLine(0,-a,-a3,-a+a3-a6);
+
+    painter.drawEllipse(-a-a2+a4,a4,a2,a2);
+
+    //Вертикалная стрелка
+    QLine line1 = QLine(-a,a4,-a,a2+a4);
+    painter.drawLine(line1);
+    line1.translate(angle,angle);
+    //Горизонтальная стрелка
+    QLine line2 = QLine(-a-a4,a2,-a+a4,a2);
+    painter.drawLine(line2);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
