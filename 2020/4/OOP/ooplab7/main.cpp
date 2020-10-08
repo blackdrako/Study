@@ -71,137 +71,147 @@ class Fraction{
 };
 
 Fraction::Fraction(int num, unsigned denum) : numerator(num), denumerator(denum){
-  if (denumerator == 0){
+    if (denumerator == 0){
     throw (MyZeroDivisionException());
   }
 }
 Fraction::Fraction(int int_part, int num, unsigned denum) : numerator(int_part * denum + num), denumerator(denum){
-  if (denumerator == 0){
-    throw (MyZeroDivisionException());
-  }
+    if (denumerator == 0){
+        throw (MyZeroDivisionException());
+    }
 }
 
 unsigned Fraction::gcd(unsigned a, unsigned b){
-  while (a && b){
-    if (a > b) a %= b;
-    else       b %= a;
-  }
-  return a+b;
+    while (a && b){
+        if (a > b) a %= b;
+        else       b %= a;
+      }
+      return a+b;
 }
+
 void Fraction::normalize(){
-  if (this->denumerator == 0){
-    throw MyZeroDivisionException();
-  }
-  int a = this->numerator;
-  unsigned b = this->denumerator;
-  unsigned d = this->gcd(abs(a), b);
-  this->numerator = a/d;
-  this->denumerator = b/d;}
+      if (this->denumerator == 0){
+        throw MyZeroDivisionException();
+      }
+      int a = this->numerator;
+      unsigned b = this->denumerator;
+      unsigned d = this->gcd(abs(a), b);
+      this->numerator = a/d;
+      this->denumerator = b/d;
+}
+
 int Fraction::safe_sum(int a, int b){
-  long result = a + b;
-  if (result > numeric_limits<int>::max() ||
-      result < numeric_limits<int>::min()){
-        throw MySumOverflowException(a, b);
-  }else{
-    return result;
-  }
+      long result = a + b;
+      if (result > numeric_limits<int>::max() ||
+          result < numeric_limits<int>::min()){
+            throw MySumOverflowException(a, b);
+      }else{
+        return result;
+      }
 }
+
 int Fraction::safe_mult(int a, int b){
-  long result = a * b;
-  if (result > numeric_limits<int>::max() ||
-      result < numeric_limits<int>::min()){
-        throw MyMultOverflowException(a, b);
-  }else{
-    return result;
-  }
+      long result = a * b;
+      if (result > numeric_limits<int>::max() ||
+          result < numeric_limits<int>::min()){
+            throw MyMultOverflowException(a, b);
+      }else{
+        return result;
+      }
 }
+
 unsigned Fraction::safe_mult(unsigned a, unsigned b){
-  long unsigned result = a * b;
-  if (result > numeric_limits<unsigned>::max() ||
-      result < numeric_limits<unsigned>::min()){
-        throw MyMultOverflowException(a, b);
-  }else{
-    return result;
-  }
+      long unsigned result = a * b;
+      if (result > numeric_limits<unsigned>::max() ||
+          result < numeric_limits<unsigned>::min()){
+            throw MyMultOverflowException(a, b);
+      }else{
+        return result;
+      }
 }
 
 Fraction Fraction::operator-(){
-  return Fraction(-this->numerator, this->denumerator);
+      return Fraction(-this->numerator, this->denumerator);
 }
+
 Fraction Fraction::operator+(const Fraction& right){
-  int a_num = this->numerator;
-  int b_num = right.numerator;
-  unsigned a_denum = this->denumerator;
-  unsigned b_denum = right.denumerator;
-  unsigned d = gcd(a_denum, b_denum);
-  int new_num;
-  unsigned new_denum;
-  try{
-    new_denum = this->safe_mult(a_denum, b_denum) / d;
-    a_num *= new_denum / a_denum;
-    b_num *= new_denum / b_denum;
-    new_num = safe_sum(a_num, b_num);
-  }
-  catch(const MyOverflowException &e){
-    std::cout << e.what();
-  }
-  Fraction result = Fraction(new_num, new_denum);
-  result.normalize();
-  return result;}
+      int a_num = this->numerator;
+      int b_num = right.numerator;
+      unsigned a_denum = this->denumerator;
+      unsigned b_denum = right.denumerator;
+      unsigned d = gcd(a_denum, b_denum);
+      int new_num;
+      unsigned new_denum;
+      try{
+        new_denum = this->safe_mult(a_denum, b_denum) / d;
+        a_num *= new_denum / a_denum;
+        b_num *= new_denum / b_denum;
+        new_num = safe_sum(a_num, b_num);
+      }
+      catch(const MyOverflowException &e){
+        std::cout << e.what();
+      }
+      Fraction result = Fraction(new_num, new_denum);
+      result.normalize();
+      return result;
+}
+
 Fraction Fraction::operator-(Fraction& right){
-  return *this + (-right);
+      return *this + (-right);
 }
+
 Fraction Fraction::operator*(const Fraction& right){
-  int a_num = this->numerator;
-  int b_num = right.numerator;
-  unsigned a_denum = this->denumerator;
-  unsigned b_denum = right.denumerator;
-  int new_num;
-  unsigned new_denum;
-  try{
-    new_num = safe_mult(a_num, b_num);
-    new_denum = safe_mult(a_denum, b_denum);
-  }
-  catch(const MyOverflowException &e){
-    cout << e.what();
-  }
-  Fraction result = Fraction(new_num, new_denum);
-  result.normalize();
-  return result;
+      int a_num = this->numerator;
+      int b_num = right.numerator;
+      unsigned a_denum = this->denumerator;
+      unsigned b_denum = right.denumerator;
+      int new_num;
+      unsigned new_denum;
+      try{
+        new_num = safe_mult(a_num, b_num);
+        new_denum = safe_mult(a_denum, b_denum);
+      }
+      catch(const MyOverflowException &e){
+        cout << e.what();
+      }
+      Fraction result = Fraction(new_num, new_denum);
+      result.normalize();
+      return result;
 }
+
 Fraction Fraction::operator/(const Fraction& right){
-  Fraction new_right = Fraction(right.denumerator, right.numerator);
-  return *this * new_right;
+      Fraction new_right = Fraction(right.denumerator, right.numerator);
+      return *this * new_right;
 }
 
 std::ostream& operator<< (ostream &out, const Fraction &f){
-  if (abs(f.numerator) >= f.denumerator){
-    int int_part = f.numerator / (long)f.denumerator;
-    int frac_part = abs(f.numerator) % (long)f.denumerator;
-    out << int_part;
-    if (frac_part != 0){
-      out << ' ' <<  frac_part << '/' << f.denumerator;
-    }
-  }else{
-    if (f.numerator % f.denumerator == 0){
-      out << f.numerator / f.denumerator;
-    }else{
-      out << f.numerator << "/" << f.denumerator;
-    }
-  }
-  return out;
+      if (abs(f.numerator) >= f.denumerator){
+        int int_part = f.numerator / (long)f.denumerator;
+        int frac_part = abs(f.numerator) % (long)f.denumerator;
+        out << int_part;
+        if (frac_part != 0){
+          out << ' ' <<  frac_part << '/' << f.denumerator;
+        }
+      }else{
+        if (f.numerator % f.denumerator == 0){
+          out << f.numerator / f.denumerator;
+        }else{
+          out << f.numerator << "/" << f.denumerator;
+        }
+      }
+      return out;
 }
 
 istream& operator>> (std::istream &in, Fraction &f){
-  in >> f.numerator;
-  in >> f.denumerator;
-  try{
-    f.normalize();
-  }
-  catch(const MyZeroDivisionException&){
-    cout << QString::fromUtf8("Знаменатель не может быть равен 0").toLocal8Bit().data() << std::endl;
-  }
-  return in;
+      in >> f.numerator;
+      in >> f.denumerator;
+      try{
+        f.normalize();
+      }
+      catch(const MyZeroDivisionException&){
+        cout << QString::fromUtf8("Знаменатель не может быть равен 0").toLocal8Bit().data() << std::endl;
+      }
+      return in;
 }
 
 int main(int argc, char *argv[])
@@ -214,7 +224,9 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_LINUX
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 #endif
-    Fraction F(2,3);
-    cout <<F;
+    Fraction F1;
+    Fraction F2(2,3);
+    cin >> F1;
+    cout << F1+F2;
     return a.exec();
 }
