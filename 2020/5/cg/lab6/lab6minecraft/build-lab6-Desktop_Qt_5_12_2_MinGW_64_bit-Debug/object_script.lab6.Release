@@ -1,0 +1,12 @@
+release/main.o
+release/Application.o
+release/Camera.o
+release/Display.o
+release/Model.o
+release/ModelCoords.o
+release/MusicPlayer.o
+release/STDUtil.o
+release/FileUtil.o
+release/Loader.o
+release/Random.o
+release/TimeCheck.o

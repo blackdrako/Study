@@ -1,0 +1,12 @@
+debug/main.o
+debug/Application.o
+debug/Camera.o
+debug/Display.o
+debug/Model.o
+debug/ModelCoords.o
+debug/MusicPlayer.o
+debug/STDUtil.o
+debug/FileUtil.o
+debug/Loader.o
+debug/Random.o
+debug/TimeCheck.o
