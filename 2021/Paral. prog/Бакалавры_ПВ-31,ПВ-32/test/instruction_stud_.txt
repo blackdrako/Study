@@ -1,0 +1,7 @@
+g++ OpenMP1.cpp -o 3 -fopenmp  // OpenMP
+./3
+
+mpicc test_mpi.c -o test_mpi   // MPI
+mpirun -np 12 ./test_mpi       // MPI
+
+/usr/local/cuda-9.0/bin/nvcc test_cuda.cu -o test_cuda
