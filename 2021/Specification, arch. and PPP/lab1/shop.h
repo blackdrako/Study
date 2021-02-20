@@ -12,6 +12,7 @@ private:
     std::string nameShop;
     std::vector<cashers> shopCashers;
     std::list<product> listShopProduct;
+    unsigned int count_shopCashers;
 public:
     shop();
     ~shop();
