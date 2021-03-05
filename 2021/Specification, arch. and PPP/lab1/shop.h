@@ -10,17 +10,19 @@ class shop
 {
 private:
     std::string nameShop;
-    std::vector<cashers> shopCashers;
+    cashers shopCashers;
     std::list<product> listShopProduct;
     unsigned int count_shopCashers;
 public:
-    shop();
+    shop(cashers c);
     ~shop();
 
     //set
     void set_nameShop(std::string str);
     //get
-    inline std::string get_nameShop();
+    inline std::string get_nameShop(){return this->nameShop;}
+
+    void jobs_Shop();
 };
 
 #endif // SHOP_H

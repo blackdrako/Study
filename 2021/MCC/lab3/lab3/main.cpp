@@ -1,59 +1,77 @@
 #include <QCoreApplication>
-
 #include <QTextCodec>
-//cout << QString::fromUtf8("").toLocal8Bit().data();
 #include <iostream>
 #include <ctime>
 #include <iomanip>
+#include <random>
+#include <assert.h>
 using namespace std;
 
-namespace sortAlg {
-    template <typename Item>
-    void exch(Item &A, Item &B)
-    {
-        Item t = A; A = B; B = t;
-    }
-
-    template <typename Item>
-    void compexch(Item &A, Item &B)
-    {
-        if (B < A) exch(A, B);
-    }
-
-    template <typename Item>
-    void insertion_sort(Item a[], int L, int R)
-    {
-        for(int i = R; i > L; i--)
-            compexch(a[i - 1], a[i]);
-
-        for (int i = L + 2; i <= R; i++)
-        {
-            int j = i;
-            Item cur = a[j];
-            while (a[j - 1] > cur)
-            {
-                a[j] = a[j - 1];
-                j--;
-            }
-            a[j] = cur;
-        }
+template <typename Item>
+void Write(vector<Item> A){
+    for (size_t i = 0;i < A.size(); i++) {
+        cout << "A[" << i << "]:" << A[i] << endl;
     }
 }
 
-namespace seachrAlg {
+//Улучшенная сортировка обменом 1
+template <typename Item>
+void extraSortSwap1(vector<Item> &A)
+{
+    bool flag = false;
+    for (size_t i = 0; i < A.size()-1; i++) {
+        for (size_t j = (A.size()-1); j > i; j--) {
+            if(A[j-1] > A[j]){
+                Item t = A[j-1];
+                A[j-1] = A[j];
+                A[j] = t;
+                flag = false;
+            } else {
+                flag = true;
+            }
+        }
+        if(flag == true)
+            return;
+    }
+}
 
+//Быстрый линейный поиск
+template <typename Item>
+int speedLinerSearch(vector<Item> A,Item need){
+    A.push_back(need);
+    size_t i = 0;
+    while (A[i]!=need) {
+        i++;
+    }
+    A.pop_back();
+    if(i != A.size() ){
+        return static_cast<int>(i);
+    }
+    return -1;
+}
+
+
+template <typename Item>
+void RandomGenerateVectorItem(vector<Item> &A){
+    Item buffer;
+    srand(time(0));
+    for (size_t i = 0; i < A.size(); i++) {
+        buffer = 1 + rand() % 60;
+        A[i] = buffer;
+    }
 }
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-#ifdef Q_OS_WIN32
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("IBM 866"));
-#endif
-
-#ifdef Q_OS_LINUX
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
-#endif
-    sortAlg::insertion_sort();
+    vector<int> A(20);
+    RandomGenerateVectorItem(A);
+    Write(A);
+    int p;
+    cin >> p;
+    cout << "ID elementa search:" << speedLinerSearch(A,p) << endl;
+    cout << "Sort vector:" << endl;
+    extraSortSwap1(A);
+    Write(A);
     return a.exec();
 }

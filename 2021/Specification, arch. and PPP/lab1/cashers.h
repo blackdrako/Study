@@ -11,15 +11,19 @@ private:
     std::string nameCashers;
     std::queue<customer> queueCustomer;
 public:
-    cashers();
+    cashers(std::string str);
 
     void set_nameCashers(std::string str);
 
-    inline std::string get_nameCashers();
+    inline std::string get_nameCashers(){return this->nameCashers;}
 
     void add_customerINCashers(customer);
 
     void kill_customerINCashers();
+
+    void refactoringCustomer();
+
+    cashers& operator=(const cashers& right);
 };
 
 #endif // CASHERS_H

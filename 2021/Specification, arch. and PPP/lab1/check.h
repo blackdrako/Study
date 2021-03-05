@@ -10,10 +10,14 @@ private:
     long double fullPrice;
 public:
     check();
+    ~check();
 
     void add_listCheckProduct(product);
 
-    inline long double get_fullPrice();
+    inline size_t get_SizeCheck(){return this->listCheckProduct.size();}
+    inline long double get_fullPrice(){return this->fullPrice;}
+
+    void write_checkProduct();
 };
 
 #endif // CHECK_H
