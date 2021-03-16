@@ -3,85 +3,23 @@
 #include <iostream>
 using namespace std;
 
-/* Функция возвращает случайное число по таблице случайных величин.
- * Входные параметры: a(значение), p(вероятность), n(Количество генераций).
- * Выходные параметры: a(значение), p(вероятность).
-*/
-template <typename Item>
-double getRand(vector<Item> &a, vector<Item> &p){
-    double r = rand() / static_cast<Item>(RAND_MAX);//Генератор псевдослучайных чисел
-    double temp = static_cast<double>(0.f);
-    for ( unsigned i = 0; i < a.size(); i++) {
-        temp += p[i];
-        if(r<temp)
-            return a[i];
-    }
-    return 0;
-}
+#define N 1000
+#define M 5
 
-struct Life
-{
-    int lifeTime;
-    int state;
+using namespace std;
 
-    Life() : lifeTime(0), state(0) {}
+float randNum = 0;
+float sum = 0;
+float ivar = 10;
+float jvar = 4;
+float kvar = 3;
 
-    bool isLive()
-    {
-        return (state != 3 && state != 4);
-    }
+int condition = 1;
+int lifeTime[N];
+int river = 0;
+int stakes = 0;
+int longestLifeTime = 0;
 
-/*
-Функция движения пьяницы
-Вход:
-p - вектор с вероятностями переходов {
-0)0->0,
-1)1->0,
-2)0->1,
-3)1->3,
-4)2->0,
-5)0->2,
-6)2->4
-}
-
-новое состояние:
-0 - обе ноги
-1 - левая нога
-2 - правая нога
-3 - река
-4 - колья
-*/
-    void move(vector<float> p)
-    {
-        //Проверяем состояния
-        if (state == 0)
-        {
-            //Получаем СВ
-            vector<float> buf_p = { p[0], p[2],p[5] };
-            vector<float> states = { 0, 1, 2 };
-            state = getRand(states, buf_p);
-            lifeTime++;
-        }
-        else if (state == 1)
-        {
-            vector<float> buf_p = { p[1], p[3] };
-            vector<float> states = { 0, 3 };
-            state = getRand(states, buf_p);
-            lifeTime++;
-        }
-        else if (state == 2)
-        {
-            vector<float> buf_p = { p[4], p[6] };
-            vector<float> states = { 0, 4 };
-            state = getRand(states, buf_p);
-            lifeTime++;
-        }
-        else
-        {
-            state = state;
-        }
-    }
-};
 
 int main(int argc, char *argv[])
 {
@@ -93,38 +31,111 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_LINUX
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 #endif
-    srand(time(0));
-    vector<float> p = {0.4f, 4.f/7.f, 0.3f, 3.f/7.f,4.f/7.f,0.3f, 3.f/7.f}; //Вероятности переходов
-    int n = 1000; //Количество экспериментов
+    float P[M][M] = { 0 };
 
-    //Просчет жизней
-    vector<Life> lifes;
-    for (int i = 0; i < n; i++)
-    {
-        Life l;
-        while (l.isLive())
-            l.move(p);
+        P[0][0] = 1;
+        P[1][1] = 1;
+        P[2][0] = ivar / (ivar + jvar);
+        P[2][3] = jvar / (ivar + jvar);
+        P[3][2] = ivar / (ivar + jvar + kvar);
+        P[3][3] = jvar / (ivar + jvar + kvar);
+        P[3][4] = kvar / (ivar + jvar + kvar);
+        P[4][1] = kvar / (jvar + kvar);
+        P[4][3] = jvar / (jvar + kvar);
 
-        lifes.push_back(l);
-    }
+        cout << QString::fromUtf8("Матрица переходов:").toLocal8Bit().data() << endl;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < M; j++)
+                printf ("%.2f\t", P[i][j]);
+            cout << endl;
+        }
 
-    //Расчет показателей
-    int totalRiverDeath = 0;
-    int totalStakesDeath = 0;
-    int totalLifeTime = 0;
+        for (int i = 0; i < N; i++) { //обнуляем массив
+            lifeTime[i] = 0;
+        }
+        srand(time(0));
 
-    for (auto a : lifes)
-    {
-        if (a.state == 3)
-            totalRiverDeath++;
-        else if (a.state == 4)
-            totalStakesDeath++;
-        totalLifeTime += a.lifeTime;
-    }
+        for (int i = 0; i < N;)
+        {
+            while ((condition != 3 || condition != 4) && i < N)
+            {
+                randNum = rand() % 99;
+                randNum /= 100;
 
-    cout << "Average life time: " << (float)totalLifeTime / n << endl;
-    cout << "% river death: " << (float)totalRiverDeath / n * 100 <<"%"<< endl;
-    cout << "% stakes death: " << (float)totalStakesDeath / n * 100 << "%" << endl;
+                switch (condition) {
+                case 0: //на левой ноге
+                    if (randNum < P[2][0])
+                    {
+                        condition = 3;
+                        lifeTime[i]++;
+                    }
+
+                    if (randNum >= P[2][0])
+                    {
+                        condition = 1;
+                        lifeTime[i]++;
+                    }
+                    break;
+
+                case 1: //на двух ногах
+                    if (randNum < P[3][2]) {
+                        condition = 0;
+                        lifeTime[i]++;
+                    }
+
+                    if (randNum >= P[3][2] && randNum < (P[3][2] + P[3][3]))
+                    {
+                        lifeTime[i]++;
+                    }
+
+                    if (randNum >= (P[3][2] + P[3][3])) {
+                        condition = 2;
+                        lifeTime[i]++;
+                    }
+                    break;
+
+                case 2: //на правой ноге
+                    if (randNum < P[4][3])
+                    {
+                        condition = 1;
+                        lifeTime[i]++;
+                    }
+
+                    if (randNum >= P[4][3])
+                    {
+                        condition = 4;
+                        lifeTime[i]++;
+                    }
+                    break;
+
+                case 3:
+                    condition = 1;
+                    i++;
+                    river++;
+                    break;
+
+                case 4:
+                    condition = 1;
+                    i++;
+                    stakes++;
+                    break;
+                }
+            }
+        }
+
+        //среднее арифметическое
+        for (int i = 0; i < N; i++)
+        {
+            sum += lifeTime[i];
+            if (lifeTime[i] > longestLifeTime)
+                longestLifeTime = lifeTime[i];
+        }
+
+        sum /= N;
+        cout << endl << QString::fromUtf8("Продолжительность жизни пьяницы на утесе: ").toLocal8Bit().data() << sum << endl;
+        cout << endl << QString::fromUtf8("Количество падений в реку:                ").toLocal8Bit().data() << river << endl;
+        cout << endl << QString::fromUtf8("Количество падений на копья:              ").toLocal8Bit().data() << stakes << endl;
+        cout << endl << QString::fromUtf8("Максимальная продолжительность жизни:     ").toLocal8Bit().data() << longestLifeTime;
 
     return a.exec();
 }
