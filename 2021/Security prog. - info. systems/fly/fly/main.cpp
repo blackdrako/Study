@@ -2,6 +2,8 @@
 #include <QTextCodec>
 #include <iostream>
 using namespace std;
+enum namepoint {A,B,C};
+
 void write_vector(vector<double> M){
     unsigned int i = 0;
     cout << "A->B:" << M[i] << endl;
@@ -23,6 +25,7 @@ void task(){
     const double i = static_cast<double>(10.f);
     const double j = static_cast<double>(4.f);
     const double k = static_cast<double>(3.f);
+    int point = namepoint::A;
     vector<double> M(7);
     M[0] = (j/(j+k));//A->B
     M[1] = (k/(j+k));//A->C
