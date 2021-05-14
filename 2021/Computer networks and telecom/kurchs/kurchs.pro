@@ -25,11 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        character.cpp \
+        construction.cpp \
+        game.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        unit.cpp
 
 HEADERS += \
-        mainwindow.h
+        character.h \
+        construction.h \
+        game.h \
+        mainwindow.h \
+        unit.h
 
 FORMS += \
         mainwindow.ui
